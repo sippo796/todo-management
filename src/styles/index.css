@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+main{
+    margin:10px;
+}
+
+h1 {
+    @apply text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl;
+    border-left: 5px solid #fff;
+    padding: 2px 8px;
+}
+  
