@@ -41,13 +41,13 @@ function App() {
       </section>
 
       {/* タスク一覧 */}
-      <section className="p-2 bg-slate-600">
+      <section className="p-2">
         {todoList.map((info, index) => (
           <div key={index} className="flex">
-            {/* <TodoItem todoInfo={info} index={index} /> */}
-            <div>{info.status}</div>
+            <TodoItem todoInfo={info} index={index} />
+            {/* <div>{info.status}</div>
             <div>{info.title}</div>
-            <div>{new Date(info.endDate).toString()}</div>
+            <div>{new Date(info.endDate).toString()}</div> */}
           </div>
         ))}
       </section>
