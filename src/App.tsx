@@ -56,9 +56,6 @@ function App() {
         {todoList.map((info, index) => (
           <div key={index} className="flex">
             <TodoItem todoInfo={info} index={index} />
-            {/* <div>{info.status}</div>
-            <div>{info.title}</div>
-            <div>{new Date(info.endDate).toString()}</div> */}
           </div>
         ))}
       </section>
