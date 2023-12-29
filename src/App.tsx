@@ -40,6 +40,17 @@ function App() {
         <h1>タスク管理アプリ</h1>
       </section>
 
+      {/* ソート */}
+      <section className="w-full">
+        <Sort
+          onSort={(type) => {
+            const temp = sortTodoItems(todoList, type);
+            console.log(JSON.stringify(temp));
+            setTodoList(temp);
+          }}
+        />
+      </section>
+
       {/* タスク一覧 */}
       <section className="p-2">
         {todoList.map((info, index) => (
