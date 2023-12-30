@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { StatusDef, TodoInfo } from "./util/types";
-import TodoItem from "./components/TodoItem";
+import { StatusDef, TodoInfo } from "@/util/types";
+import TodoItem from "@/components/TodoItem";
+import Sort from "@/components/Sort";
+import { sortTodoItems } from "@/util/tools";
 
 function App() {
   const [todoList, setTodoList] = useState<TodoInfo[]>([]);
@@ -43,9 +45,8 @@ function App() {
       {/* ソート */}
       <section className="w-full">
         <Sort
-          onSort={(type) => {
-            const temp = sortTodoItems(todoList, type);
-            console.log(JSON.stringify(temp));
+          onSort={(type, ascending) => {
+            const temp = [...sortTodoItems(todoList, type, ascending)];
             setTodoList(temp);
           }}
         />
