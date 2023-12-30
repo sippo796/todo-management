@@ -10,3 +10,9 @@ export type TodoInfo = {
   endDate: number;
   status: StatusDef;
 };
+
+export enum SortType {
+  status,
+  title,
+  date,
+}

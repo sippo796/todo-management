@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { StatusDef, TodoInfo } from "./util/types";
-import TodoItem from "./components/TodoItem";
+import { StatusDef, TodoInfo } from "@/util/types";
+import TodoItem from "@/components/TodoItem";
+import Sort from "@/components/Sort";
+import { sortTodoItems } from "@/util/tools";
 
 function App() {
   const [todoList, setTodoList] = useState<TodoInfo[]>([]);
@@ -40,14 +42,21 @@ function App() {
         <h1>タスク管理アプリ</h1>
       </section>
 
+      {/* ソート */}
+      <section className="w-full">
+        <Sort
+          onSort={(type, ascending) => {
+            const temp = [...sortTodoItems(todoList, type, ascending)];
+            setTodoList(temp);
+          }}
+        />
+      </section>
+
       {/* タスク一覧 */}
       <section className="p-2">
         {todoList.map((info, index) => (
           <div key={index} className="flex">
             <TodoItem todoInfo={info} index={index} />
-            {/* <div>{info.status}</div>
-            <div>{info.title}</div>
-            <div>{new Date(info.endDate).toString()}</div> */}
           </div>
         ))}
       </section>

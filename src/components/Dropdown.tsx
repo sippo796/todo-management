@@ -34,8 +34,8 @@ const Dropdown = ({ onSelect, initialStatus, index }: Props) => {
   };
 
   return (
-    <FormControl className="w-24">
-      <InputLabel id={labelId}>ステータス</InputLabel>
+    <FormControl className="w-32">
+      <InputLabel id={labelId} />
       <Select
         sx={{ height: "40px" }}
         labelId={labelId}
