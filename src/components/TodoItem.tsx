@@ -14,7 +14,7 @@ const TodoItem = ({ todoInfo, index }: Props) => {
       <Dropdown
         index={index}
         initialStatus={todoInfo.status}
-        onSelect={(status) => console.log(status)}
+        onSelect={(status) => (todoInfo.status = status)}
       />
 
       {/* タイトル */}
