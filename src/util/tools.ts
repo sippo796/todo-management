@@ -1,4 +1,4 @@
-import { StatusDef } from "./types";
+import { SortType, StatusDef, TodoInfo } from "./types";
 
 export const stringConvertToStatus = (status: string): StatusDef => {
   return parseInt(status, 10) as StatusDef;
@@ -27,4 +27,31 @@ export const timestampConvertToFormatDate = (timestamp: number): string => {
   const formattedDay = day < 10 ? `0${day}` : `${day}`;
 
   return `${year}/${formattedMonth}/${formattedDay}`;
+};
+
+export const sortTodoItems = (
+  items: TodoInfo[],
+  type: SortType,
+  ascending: boolean
+): TodoInfo[] => {
+  switch (type) {
+    case SortType.status:
+      if (ascending) {
+        return items.sort((a, b) => a.status - b.status);
+      } else {
+        return items.sort((a, b) => b.status - a.status);
+      }
+    case SortType.title:
+      if (ascending) {
+        return items.sort((a, b) => a.title.localeCompare(b.title));
+      } else {
+        return items.sort((a, b) => b.title.localeCompare(a.title));
+      }
+    case SortType.date:
+      if (ascending) {
+        return items.sort((a, b) => a.endDate - b.endDate);
+      } else {
+        return items.sort((a, b) => b.endDate - a.endDate);
+      }
+  }
 };
