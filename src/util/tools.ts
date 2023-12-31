@@ -18,7 +18,10 @@ export const statusConvertToString = (status: StatusDef): string => {
   }
 };
 
-export const timestampConvertToFormatDate = (timestamp: number): string => {
+export const timestampConvertToFormatDate = (
+  timestamp: number,
+  delimiter = "/"
+): string => {
   const date = new Date(timestamp);
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
@@ -27,7 +30,7 @@ export const timestampConvertToFormatDate = (timestamp: number): string => {
   const formattedMonth = month < 10 ? `0${month}` : `${month}`;
   const formattedDay = day < 10 ? `0${day}` : `${day}`;
 
-  return `${year}/${formattedMonth}/${formattedDay}`;
+  return `${year}${delimiter}${formattedMonth}${delimiter}${formattedDay}`;
 };
 
 export const sortTodoItems = (
