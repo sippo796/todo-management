@@ -1,3 +1,4 @@
+import { API_URL } from "./defines";
 import { SortType, StatusDef, TodoInfo } from "./types";
 
 export const stringConvertToStatus = (status: string): StatusDef => {
@@ -54,4 +55,42 @@ export const sortTodoItems = (
         return items.sort((a, b) => b.endDate - a.endDate);
       }
   }
+};
+
+export const postData = async (todoInfo: TodoInfo) => {
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(todoInfo),
+  });
+  return response.json();
+};
+
+export const putData = async (todoInfo: TodoInfo): Promise<TodoInfo> => {
+  const response = await fetch(`${API_URL}/${todoInfo.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(todoInfo),
+  });
+  return response.json();
+};
+
+export const deleteData = async (id: number): Promise<void> => {
+  await fetch(`${API_URL}/${id}`, {
+    method: "DELETE",
+  });
+};
+
+export const readData = async (id: number): Promise<TodoInfo> => {
+  const response = await fetch(`${API_URL}/${id}`);
+  return response.json();
+};
+
+export const readAll = async (): Promise<TodoInfo[]> => {
+  const response = await fetch(API_URL);
+  return response.json();
 };

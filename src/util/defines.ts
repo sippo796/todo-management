@@ -4,3 +4,5 @@ export enum RoutePath {
   Update = "/update",
   NotFound = "/*",
 }
+
+export const API_URL = "http://localhost:3000/todos";
