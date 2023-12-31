@@ -1,3 +1,4 @@
+import { API_URL } from "./defines";
 import { SortType, StatusDef, TodoInfo } from "./types";
 
 export const stringConvertToStatus = (status: string): StatusDef => {
@@ -17,7 +18,10 @@ export const statusConvertToString = (status: StatusDef): string => {
   }
 };
 
-export const timestampConvertToFormatDate = (timestamp: number): string => {
+export const timestampConvertToFormatDate = (
+  timestamp: number,
+  delimiter = "/"
+): string => {
   const date = new Date(timestamp);
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
@@ -26,7 +30,7 @@ export const timestampConvertToFormatDate = (timestamp: number): string => {
   const formattedMonth = month < 10 ? `0${month}` : `${month}`;
   const formattedDay = day < 10 ? `0${day}` : `${day}`;
 
-  return `${year}/${formattedMonth}/${formattedDay}`;
+  return `${year}${delimiter}${formattedMonth}${delimiter}${formattedDay}`;
 };
 
 export const sortTodoItems = (
@@ -54,4 +58,42 @@ export const sortTodoItems = (
         return items.sort((a, b) => b.endDate - a.endDate);
       }
   }
+};
+
+export const postData = async (todoInfo: TodoInfo) => {
+  const response = await fetch(API_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(todoInfo),
+  });
+  return response.json();
+};
+
+export const putData = async (todoInfo: TodoInfo): Promise<TodoInfo> => {
+  const response = await fetch(`${API_URL}/${todoInfo.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(todoInfo),
+  });
+  return response.json();
+};
+
+export const deleteData = async (id: number): Promise<void> => {
+  await fetch(`${API_URL}/${id}`, {
+    method: "DELETE",
+  });
+};
+
+export const readData = async (id: number): Promise<TodoInfo> => {
+  const response = await fetch(`${API_URL}/${id}`);
+  return response.json();
+};
+
+export const readAll = async (): Promise<TodoInfo[]> => {
+  const response = await fetch(API_URL);
+  return response.json();
 };

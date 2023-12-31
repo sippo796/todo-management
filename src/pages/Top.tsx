@@ -1,8 +1,9 @@
 import PageBase from "@/components/PageBase";
 import Sort from "@/components/Sort";
 import TodoItem from "@/components/TodoItem";
+import { API_URL } from "@/util/defines";
 import { sortTodoItems } from "@/util/tools";
-import { StatusDef, TodoInfo } from "@/util/types";
+import { TodoInfo } from "@/util/types";
 import { useEffect, useState } from "react";
 
 const Top = () => {
@@ -10,27 +11,10 @@ const Top = () => {
 
   useEffect(() => {
     const readData = async () => {
-      // todo: test data
-      setTodoList([
-        {
-          title: "タスク１",
-          detail: "タスク１の詳細です",
-          status: StatusDef.notStarted,
-          endDate: new Date(2023, 11, 26).getTime(),
-        },
-        {
-          title: "タスク２",
-          detail: "タスク２の詳細です",
-          status: StatusDef.inProgress,
-          endDate: new Date(2024, 0, 5).getTime(),
-        },
-        {
-          title: "タスク３",
-          detail: "タスク３の詳細です",
-          status: StatusDef.completed,
-          endDate: new Date(2024, 0, 31).getTime(),
-        },
-      ]);
+      const response = await fetch(API_URL);
+      const todos = await response.json();
+
+      setTodoList(todos);
     };
 
     readData();

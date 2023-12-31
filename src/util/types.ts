@@ -5,6 +5,7 @@ export enum StatusDef {
 }
 
 export type TodoInfo = {
+  id: number;
   title: string;
   detail: string;
   endDate: number;
