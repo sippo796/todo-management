@@ -1,66 +1,24 @@
-import { useEffect, useState } from "react";
-import { StatusDef, TodoInfo } from "@/util/types";
-import TodoItem from "@/components/TodoItem";
-import Sort from "@/components/Sort";
-import { sortTodoItems } from "@/util/tools";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { RoutePath } from "@/util/defines";
+import Top from "@/pages/Top";
+import NotFound from "@/pages/NotFound";
+import Create from "@/pages/Create";
+import Update from "@/pages/Update";
 
 function App() {
-  const [todoList, setTodoList] = useState<TodoInfo[]>([]);
-
-  useEffect(() => {
-    const readData = async () => {
-      // todo: test data
-      setTodoList([
-        {
-          title: "タスク１",
-          detail: "タスク１の詳細です",
-          status: StatusDef.notStarted,
-          endDate: new Date(2023, 11, 26).getTime(),
-        },
-        {
-          title: "タスク２",
-          detail: "タスク２の詳細です",
-          status: StatusDef.inProgress,
-          endDate: new Date(2024, 0, 5).getTime(),
-        },
-        {
-          title: "タスク３",
-          detail: "タスク３の詳細です",
-          status: StatusDef.completed,
-          endDate: new Date(2024, 0, 31).getTime(),
-        },
-      ]);
-    };
-
-    readData();
-  }, []);
-
   return (
-    <main>
-      {/* アプリ名 */}
-      <section className="bg-black text-white p-2 rounded-t-lg">
-        <h1>タスク管理アプリ</h1>
-      </section>
-
-      {/* ソート */}
-      <section className="w-full">
-        <Sort
-          onSort={(type, ascending) => {
-            const temp = [...sortTodoItems(todoList, type, ascending)];
-            setTodoList(temp);
-          }}
-        />
-      </section>
-
-      {/* タスク一覧 */}
-      <section className="p-2">
-        {todoList.map((info, index) => (
-          <div key={index} className="flex">
-            <TodoItem todoInfo={info} index={index} />
-          </div>
-        ))}
-      </section>
-    </main>
+    <BrowserRouter>
+      <Routes>
+        {/* Top */}
+        <Route path={RoutePath.Top} element={<Top />} />
+        {/* 新規登録 */}
+        <Route path={RoutePath.Create} element={<Create />} />
+        {/* 編集 */}
+        <Route path={RoutePath.Update} element={<Update />} />
+        {/* NotFound */}
+        <Route path={RoutePath.NotFound} element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
