@@ -60,7 +60,7 @@ export const sortTodoItems = (
   }
 };
 
-export const postData = async (todoInfo: TodoInfo) => {
+export const addData = async (todoInfo: TodoInfo) => {
   const response = await fetch(API_URL, {
     method: "POST",
     headers: {
@@ -71,7 +71,7 @@ export const postData = async (todoInfo: TodoInfo) => {
   return response.json();
 };
 
-export const putData = async (todoInfo: TodoInfo): Promise<TodoInfo> => {
+export const updateData = async (todoInfo: TodoInfo): Promise<TodoInfo> => {
   const response = await fetch(`${API_URL}/${todoInfo.id}`, {
     method: "PUT",
     headers: {
