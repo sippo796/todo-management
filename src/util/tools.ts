@@ -60,40 +60,61 @@ export const sortTodoItems = (
   }
 };
 
+export class ApiError extends Error {}
 export const addData = async (todoInfo: TodoInfo) => {
-  const response = await fetch(API_URL, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(todoInfo),
-  });
-  return response.json();
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(todoInfo),
+    });
+    return response.json();
+  } catch (error) {
+    throw new ApiError();
+  }
 };
 
 export const updateData = async (todoInfo: TodoInfo): Promise<TodoInfo> => {
-  const response = await fetch(`${API_URL}/${todoInfo.id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(todoInfo),
-  });
-  return response.json();
+  try {
+    const response = await fetch(`${API_URL}/${todoInfo.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(todoInfo),
+    });
+    return response.json();
+  } catch (error) {
+    throw new ApiError();
+  }
 };
 
 export const deleteData = async (id: number): Promise<void> => {
-  await fetch(`${API_URL}/${id}`, {
-    method: "DELETE",
-  });
+  try {
+    await fetch(`${API_URL}/${id}`, {
+      method: "DELETE",
+    });
+  } catch (error) {
+    throw new ApiError();
+  }
 };
 
 export const readData = async (id: number): Promise<TodoInfo> => {
-  const response = await fetch(`${API_URL}/${id}`);
-  return response.json();
+  try {
+    const response = await fetch(`${API_URL}/${id}`);
+    return response.json();
+  } catch (error) {
+    throw new ApiError();
+  }
 };
 
 export const readAll = async (): Promise<TodoInfo[]> => {
-  const response = await fetch(API_URL);
-  return response.json();
+  try {
+    const response = await fetch(API_URL);
+    return response.json();
+  } catch (error) {
+    throw new ApiError();
+  }
 };
