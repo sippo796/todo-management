@@ -2,7 +2,12 @@ import { API_URL } from "./defines";
 import { SortType, StatusDef, TodoInfo } from "./types";
 
 export const stringConvertToStatus = (status: string): StatusDef => {
-  return parseInt(status, 10) as StatusDef;
+  const value = parseInt(status, 10);
+  if (0 <= value && value < 3) {
+    return value as StatusDef;
+  } else {
+    return StatusDef.notStarted;
+  }
 };
 
 export const statusConvertToString = (status: StatusDef): string => {
@@ -22,7 +27,12 @@ export const timestampConvertToFormatDate = (
   timestamp: number,
   delimiter = "/"
 ): string => {
-  const date = new Date(timestamp);
+  let date = new Date(timestamp);
+
+  if (isNaN(date.getTime())) {
+    date = new Date();
+  }
+
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
   const day = date.getDate();
