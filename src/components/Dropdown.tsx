@@ -20,7 +20,8 @@ const Dropdown = ({ onSelect, initialStatus, index }: Props) => {
   const [status, setStatus] = useState(initialStatus);
   const labelId = `label-id-${index}`;
   const selectId = `select-id-${index}`;
-  const lavelValue = "ステータス";
+  const labelValue = "status-value";
+  const testLabelId = `test-label-${index}`;
 
   useEffect(() => {
     setStatus(initialStatus);
@@ -41,8 +42,9 @@ const Dropdown = ({ onSelect, initialStatus, index }: Props) => {
         labelId={labelId}
         id={selectId}
         value={status.toString()}
-        label={lavelValue}
+        aria-label={labelValue}
         onChange={handleChange}
+        data-testid={testLabelId}
       >
         <MenuItem value={StatusDef.notStarted}>
           {statusConvertToString(StatusDef.notStarted)}
