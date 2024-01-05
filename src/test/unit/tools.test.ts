@@ -1,10 +1,11 @@
+/** @jest-environment node */
 import {
   sortTodoItems,
   statusConvertToString,
   stringConvertToStatus,
   timestampConvertToFormatDate,
-} from "../util/tools";
-import { SortType, StatusDef, TodoInfo } from "../util/types";
+} from "../../util/tools";
+import { SortType, StatusDef, TodoInfo } from "../../util/types";
 
 describe("stringConvertToStatusテスト", () => {
   it.each`
