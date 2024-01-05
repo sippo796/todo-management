@@ -1,3 +1,5 @@
+/** @jest-environment node */
+
 import { TodoInfo } from "@/util/types";
 import {
   deleteData,
@@ -5,7 +7,7 @@ import {
   updateData,
   readAll,
   readData,
-} from "../util/tools";
+} from "../../util/tools";
 
 export const resetDatabase = async () => {
   // db.jsonのリセット

@@ -1,3 +1,4 @@
+/** @jest-environment node */
 import {
   ApiError,
   addData,
@@ -5,7 +6,7 @@ import {
   readAll,
   readData,
   updateData,
-} from "../util/tools";
+} from "../../util/tools";
 
 describe("モックサーバー異常系テスト", () => {
   beforeAll(() => {
