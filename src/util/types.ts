@@ -22,3 +22,9 @@ export enum PageType {
   create,
   edit,
 }
+
+export interface InputData {
+  title: string;
+  details: string;
+  endDate: string;
+}

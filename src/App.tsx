@@ -3,7 +3,7 @@ import { RoutePath } from "@/util/defines";
 import Top from "@/pages/Top";
 import NotFound from "@/pages/NotFound";
 import Create from "@/pages/Create";
-import { PageType } from "@/util/types";
+import Edit from "@/pages/Edit";
 
 function App() {
   return (
@@ -12,15 +12,9 @@ function App() {
         {/* Top */}
         <Route path={RoutePath.Top} element={<Top />} />
         {/* 新規登録 */}
-        <Route
-          path={RoutePath.Create}
-          element={<Create type={PageType.create} />}
-        />
+        <Route path={RoutePath.Create} element={<Create />} />
         {/* 編集 */}
-        <Route
-          path={RoutePath.Edit}
-          element={<Create type={PageType.edit} />}
-        />
+        <Route path={RoutePath.Edit} element={<Edit />} />
         {/* NotFound */}
         <Route path={RoutePath.NotFound} element={<NotFound />} />
       </Routes>
