@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Top = () => {
+  const [isLoad, setIsLoad] = useState(false);
   const [todoList, setTodoList] = useState<TodoInfo[]>([]);
   const navigate = useNavigate();
 
@@ -17,6 +18,7 @@ const Top = () => {
       const todos = await response.json();
 
       setTodoList(todos);
+      setIsLoad(true);
     };
 
     readData();
@@ -34,13 +36,19 @@ const Top = () => {
       </section>
 
       {/* タスク一覧 */}
-      <section className="p-2">
-        {todoList.map((info, index) => (
-          <div key={index} className="flex">
-            <TodoItem todoInfo={info} index={index} />
-          </div>
-        ))}
-      </section>
+      {isLoad ? (
+        <section className="p-2">
+          {todoList.map((info, index) => (
+            <div key={index} className="flex">
+              <TodoItem todoInfo={info} index={index} />
+            </div>
+          ))}
+        </section>
+      ) : (
+        <div className="w-full h-full">
+          <h1>Loading...</h1>
+        </div>
+      )}
 
       {/* 新規登録ボタン */}
       <section className="items-center flex w-full">
