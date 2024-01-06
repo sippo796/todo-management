@@ -1,7 +1,7 @@
 export enum RoutePath {
   Top = "/",
   Create = "/create",
-  Update = "/update",
+  Edit = "/edit",
   NotFound = "/*",
 }
 
