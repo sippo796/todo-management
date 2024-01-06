@@ -1,6 +1,8 @@
 import { TodoInfo } from "@/util/types";
 import Dropdown from "./Dropdown";
 import { timestampConvertToFormatDate } from "@/util/tools";
+import { useNavigate } from "react-router-dom";
+import { RoutePath } from "@/util/defines";
 
 interface Props {
   todoInfo: TodoInfo;
@@ -8,8 +10,17 @@ interface Props {
 }
 
 const TodoItem = ({ todoInfo, index }: Props) => {
+  const navigate = useNavigate();
+
   return (
-    <div className="flex my-2 items-center w-full bg-slate-400">
+    <div
+      className="flex my-2 items-center w-full bg-slate-400"
+      onDoubleClick={() => {
+        navigate(RoutePath.Edit, {
+          state: { initialData: todoInfo },
+        });
+      }}
+    >
       {/* ステータス */}
       <Dropdown
         index={index}
