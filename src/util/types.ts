@@ -17,3 +17,8 @@ export enum SortType {
   title,
   date,
 }
+
+export enum PageType {
+  create,
+  edit,
+}
