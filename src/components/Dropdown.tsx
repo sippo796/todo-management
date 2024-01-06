@@ -1,4 +1,3 @@
-"use cliend";
 import { useEffect, useState } from "react";
 import { StatusDef } from "@/util/types";
 import {

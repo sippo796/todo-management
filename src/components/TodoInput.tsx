@@ -79,13 +79,6 @@ const TodoInput = ({ type, initialData }: Props) => {
         status: StatusDef.notStarted,
       });
 
-      // フォームのリセット
-      //   setFormData({
-      //     title: "",
-      //     details: "",
-      //     endDate: "",
-      //   });
-
       showDialog("タスクを新規作成しました", RoutePath.Top);
     } catch (error) {
       setDialogMessage("タスクの作成に失敗しました");
