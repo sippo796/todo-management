@@ -21,35 +21,50 @@ const Sort = ({ onSort }: Props) => {
         <button
           type="button"
           className={`w-32 ${sortButtonStyle}`}
+          data-testid="status-sort"
           onClick={() => {
             onSort(SortType.status, !statusSortAscending);
             setStatusSortAscending((prev) => !prev);
           }}
         >
           ステータス
-          {statusSortAscending ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+          {statusSortAscending ? (
+            <ArrowDropUpIcon data-testid="status-asc" />
+          ) : (
+            <ArrowDropDownIcon data-testid="status-dsc" />
+          )}
         </button>
         <button
           type="button"
           className={`flex-grow ${sortButtonStyle}`}
+          data-testid="title-sort"
           onClick={() => {
             onSort(SortType.title, !titleSortAscending);
             setTitleSortAscending((prev) => !prev);
           }}
         >
           タイトル
-          {titleSortAscending ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+          {titleSortAscending ? (
+            <ArrowDropUpIcon data-testid="title-asc" />
+          ) : (
+            <ArrowDropDownIcon data-testid="title-dsc" />
+          )}
         </button>
         <button
           type="button"
           className={`${sortButtonStyle}`}
+          data-testid="enddate-sort"
           onClick={() => {
             onSort(SortType.date, !dateSortAscending);
             setDateSortAscending((prev) => !prev);
           }}
         >
           完了予定日
-          {dateSortAscending ? <ArrowDropUpIcon /> : <ArrowDropDownIcon />}
+          {dateSortAscending ? (
+            <ArrowDropUpIcon data-testid="enddate-asc" />
+          ) : (
+            <ArrowDropDownIcon data-testid="enddate-dsc" />
+          )}
         </button>
       </div>
     </div>
