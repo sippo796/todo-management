@@ -15,7 +15,7 @@ const TodoItem = ({ todoInfo, index }: Props) => {
   return (
     <div
       className="flex my-2 items-center w-full bg-slate-400"
-      data-testid={`todoinfo-${index}`}
+      data-testid={`todoinfo`}
       onDoubleClick={() => {
         navigate(RoutePath.Edit, {
           state: { initialData: todoInfo },

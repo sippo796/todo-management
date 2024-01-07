@@ -92,7 +92,7 @@ describe("TodoItemコンポーネントテスト", () => {
       </MemoryRouter>
     );
 
-    const todoInfo = screen.getByTestId("todoinfo-1");
+    const todoInfo = screen.getByTestId("todoinfo");
     await user.dblClick(todoInfo);
 
     const pageTitle = screen.getByText("タスク編集・削除");
