@@ -1,8 +1,8 @@
 import PageBase from "@/components/PageBase";
 import Sort from "@/components/Sort";
 import TodoItem from "@/components/TodoItem";
-import { API_URL, RoutePath } from "@/util/defines";
-import { sortTodoItems } from "@/util/tools";
+import { RoutePath } from "@/util/defines";
+import { readAll, sortTodoItems } from "@/util/tools";
 import { TodoInfo } from "@/util/types";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -14,9 +14,7 @@ const Top = () => {
 
   useEffect(() => {
     const readData = async () => {
-      const response = await fetch(API_URL);
-      const todos = await response.json();
-
+      const todos = await readAll();
       setTodoList(todos);
       setIsLoad(true);
     };
@@ -38,7 +36,7 @@ const Top = () => {
       {/* タスク一覧 */}
       {isLoad ? (
         <section className="p-2">
-          {todoList.map((info, index) => (
+          {todoList?.map((info, index) => (
             <div key={index} className="flex">
               <TodoItem todoInfo={info} index={index} />
             </div>
@@ -55,6 +53,7 @@ const Top = () => {
         <button
           type="button"
           onClick={() => navigate(RoutePath.Create)}
+          data-testid="create-button"
           className="m-auto w-24 h-10 rounded-sm bg-orange-400 hover:bg-orange-300"
         >
           新規登録
