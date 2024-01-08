@@ -5,18 +5,24 @@ import { RoutePath } from "@/util/defines";
 import { readAll, sortTodoItems } from "@/util/tools";
 import { TodoInfo } from "@/util/types";
 import { useEffect, useState } from "react";
+import { useErrorBoundary } from "react-error-boundary";
 import { useNavigate } from "react-router-dom";
 
 const Top = () => {
   const [isLoad, setIsLoad] = useState(false);
   const [todoList, setTodoList] = useState<TodoInfo[]>([]);
   const navigate = useNavigate();
+  const { showBoundary } = useErrorBoundary();
 
   useEffect(() => {
     const readData = async () => {
-      const todos = await readAll();
-      setTodoList(todos);
-      setIsLoad(true);
+      try {
+        const todos = await readAll();
+        setTodoList(todos);
+        setIsLoad(true);
+      } catch (error) {
+        showBoundary("タスクの読み込みに失敗しました");
+      }
     };
 
     readData();
