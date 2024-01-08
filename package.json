@@ -9,7 +9,9 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "mock": "json-server --watch src/data/db.json --port 3000",
-    "test": "jest"
+    "test": "jest",
+    "test:uni": "jest src/test/unit",
+    "test:int": "jest src/test/integration"
   },
   "dependencies": {
     "@emotion/react": "^11.11.3",
