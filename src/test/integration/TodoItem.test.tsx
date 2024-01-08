@@ -12,6 +12,8 @@ const user = userEvent.setup();
 
 describe("TodoItemコンポーネントテスト", () => {
   const fixedTimestamp = new Date("2024-01-05").getTime();
+  const onErrorMock = jest.fn();
+  beforeAll(() => {});
 
   it("初期表示", () => {
     render(
@@ -41,6 +43,7 @@ describe("TodoItemコンポーネントテスト", () => {
               endDate: fixedTimestamp,
               status: StatusDef.notStarted,
             }}
+            onError={onErrorMock}
           />
           <Edit />
         </MemoryRouter>
@@ -87,6 +90,7 @@ describe("TodoItemコンポーネントテスト", () => {
             endDate: fixedTimestamp,
             status: StatusDef.notStarted,
           }}
+          onError={onErrorMock}
         />
         <Edit />
       </MemoryRouter>
