@@ -4,6 +4,8 @@ import TodoItem from "@/components/TodoItem";
 import { RoutePath } from "@/util/defines";
 import { readAll, sortTodoItems } from "@/util/tools";
 import { TodoInfo } from "@/util/types";
+import Message from "@/components/Message";
+import { Modal } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useErrorBoundary } from "react-error-boundary";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +15,8 @@ const Top = () => {
   const [todoList, setTodoList] = useState<TodoInfo[]>([]);
   const navigate = useNavigate();
   const { showBoundary } = useErrorBoundary();
+  const [isMessageShow, setIsMessageShow] = useState(false);
+  const [dialogMessage, setDialogMessage] = useState("");
 
   useEffect(() => {
     const readData = async () => {
@@ -27,6 +31,16 @@ const Top = () => {
 
     readData();
   }, []);
+
+  const showDialog = async (message: string) => {
+    setDialogMessage(message);
+    setIsMessageShow(true);
+
+    setTimeout(() => {
+      setIsMessageShow(false);
+    }, 2000);
+  };
+
   return (
     <PageBase>
       {/* ソート */}
@@ -44,7 +58,13 @@ const Top = () => {
         <section className="p-2">
           {todoList?.map((info, index) => (
             <div key={index} className="flex">
-              <TodoItem todoInfo={info} index={index} />
+              <TodoItem
+                todoInfo={info}
+                index={index}
+                onError={(message) => {
+                  showDialog(message);
+                }}
+              />
             </div>
           ))}
         </section>
@@ -65,6 +85,17 @@ const Top = () => {
           新規登録
         </button>
       </section>
+
+      <Modal
+        open={isMessageShow}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+        className="flex items-center justify-center"
+      >
+        <div>
+          <Message message={dialogMessage}></Message>
+        </div>
+      </Modal>
     </PageBase>
   );
 };
