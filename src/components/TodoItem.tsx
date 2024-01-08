@@ -26,7 +26,18 @@ const TodoItem = ({ todoInfo, index }: Props) => {
       <Dropdown
         index={index}
         initialStatus={todoInfo.status}
-        onSelect={(status) => (todoInfo.status = status)}
+        onSelect={async (status) => {
+          todoInfo.status = status;
+          setColor(getColor(status));
+          try {
+            await updateData({
+              ...todoInfo,
+              status: status,
+            });
+          } catch (error) {
+            onError("ステータスの保存に失敗しました");
+          }
+        }}
       />
 
       {/* タイトル */}
