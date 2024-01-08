@@ -7,6 +7,8 @@ import Top from "@/pages/Top";
 import { BrowserRouter, MemoryRouter, Route, Routes } from "react-router-dom";
 import { RoutePath } from "@/util/defines";
 import Create from "@/pages/Create";
+import { ErrorBoundary } from "react-error-boundary";
+import Error from "@/pages/Error";
 
 describe("Top画面テスト", () => {
   const user = userEvent.setup();
@@ -41,6 +43,13 @@ describe("Top画面テスト", () => {
         ]);
       },
     });
+
+    jest.mock("react-error-boundary", () => ({
+      ...jest.requireActual("react-error-boundary"),
+      ErrorBoundary: ({ children }: { children: React.ReactNode }) => (
+        <>{children}</>
+      ),
+    }));
   });
 
   afterAll(() => {
@@ -50,7 +59,9 @@ describe("Top画面テスト", () => {
   it("タスク一覧が表示されること", async () => {
     render(
       <BrowserRouter>
-        <Top />
+        <ErrorBoundary FallbackComponent={Error}>
+          <Top />
+        </ErrorBoundary>
       </BrowserRouter>
     );
 
@@ -61,7 +72,9 @@ describe("Top画面テスト", () => {
   it("ステータスソートでタスク一覧の順番が変わること", async () => {
     render(
       <BrowserRouter>
-        <Top />
+        <ErrorBoundary FallbackComponent={Error}>
+          <Top />
+        </ErrorBoundary>
       </BrowserRouter>
     );
 
@@ -84,7 +97,9 @@ describe("Top画面テスト", () => {
   it("タイトルソートでタスク一覧の順番が変わること", async () => {
     render(
       <BrowserRouter>
-        <Top />
+        <ErrorBoundary FallbackComponent={Error}>
+          <Top />
+        </ErrorBoundary>
       </BrowserRouter>
     );
 
@@ -107,7 +122,9 @@ describe("Top画面テスト", () => {
   it("完了予定日ソートでタスク一覧の順番が変わること", async () => {
     render(
       <BrowserRouter>
-        <Top />
+        <ErrorBoundary FallbackComponent={Error}>
+          <Top />
+        </ErrorBoundary>
       </BrowserRouter>
     );
 
@@ -130,10 +147,12 @@ describe("Top画面テスト", () => {
   it("新規登録ボタン押下で新規登録画面に遷移する", async () => {
     render(
       <MemoryRouter initialEntries={[RoutePath.Top]}>
-        <Routes>
-          <Route path={RoutePath.Top} element={<Top />} />
-          <Route path={RoutePath.Create} element={<Create />} />
-        </Routes>
+        <ErrorBoundary FallbackComponent={Error}>
+          <Routes>
+            <Route path={RoutePath.Top} element={<Top />} />
+            <Route path={RoutePath.Create} element={<Create />} />
+          </Routes>
+        </ErrorBoundary>
       </MemoryRouter>
     );
 
